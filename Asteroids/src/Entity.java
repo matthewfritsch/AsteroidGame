@@ -7,12 +7,16 @@ import java.awt.geom.AffineTransform;
 
 public abstract class Entity {
 
-	double x,y, rotation; 
+	double x,y, rotation, xSpeed, ySpeed; 
+	
 	Color color;
 	
 	Shape shape; //object has shape
 	
-	public abstract void tick(); //has ability to update
+	public void tick() {//has ability to update
+		this.x+=this.xSpeed;
+		this.y+=this.ySpeed;
+	}
 	
 	public void paint(Graphics g) {
 		

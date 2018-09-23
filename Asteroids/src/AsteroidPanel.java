@@ -22,7 +22,8 @@ public class AsteroidPanel extends JPanel {
 		this.setBackground(Color.BLACK); //set default  background as something that will fit in with the game
 		Player p = new Player();
 		entities.add(p);
-		
+		this.addKeyListener(p);
+		this.setFocusable(true);
 	}
 	
 	public void tick() {
