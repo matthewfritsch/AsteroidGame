@@ -17,7 +17,7 @@ public class Player extends Entity {
 		myShape.addPoint(-5, 7);
 		myShape.addPoint(-3, 0);
 		myShape.addPoint(-5, -7);
-		//
+		
 		myShape.translate(-3, 0); //point it 
 		this.shape = myShape; //polygon is type of shape, woo
 		
