@@ -14,7 +14,6 @@ public class AsteroidPanel extends JPanel {
 	private static final long serialVersionUID = 1L; //be rid of stupid warning
 	
 	private static BufferedImage stars = ImageHandler.getImage("stars.png");
-	private Random rand = new Random();
 	
 	private ArrayList<Entity> entities = new ArrayList<Entity>();
 	
@@ -36,7 +35,7 @@ public class AsteroidPanel extends JPanel {
 	public void paintComponent(Graphics g) { //Final step of drawing chain by repaint
 		super.paintComponent(g); //default draw, just fills background
 		
-		TexturePaint starBG = new TexturePaint(stars, new Rectangle(rand.nextInt(100),rand.nextInt(100),stars.getWidth(), stars.getHeight()));//lets you paint an image and tile it from an origin      
+		TexturePaint starBG = new TexturePaint(stars, new Rectangle(0,0,stars.getWidth(), stars.getHeight()));//lets you paint an image and tile it from an origin      
 		Graphics2D g2 = (Graphics2D)g;
 		
 		g2.setPaint(starBG); //like setting the paint, but is setting the tile to paint repeatedly instead of a single color
