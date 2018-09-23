@@ -5,6 +5,7 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.TexturePaint;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
@@ -13,10 +14,13 @@ public class AsteroidPanel extends JPanel {
 	
 	private static BufferedImage stars = ImageHandler.getImage("stars.png");
 	
+	private ArrayList<Entity> entities = new ArrayList<Entity>();
+	
 	public AsteroidPanel() {
 		this.setPreferredSize(new Dimension(640,480)); //set preferred size of the game panel used with pack()
 		this.setBackground(Color.BLACK); //set default  background as something that will fit in with the game
-		
+		Player p = new Player();
+		entities.add(p);
 		
 	}
 	
@@ -29,6 +33,9 @@ public class AsteroidPanel extends JPanel {
 		
 		g2.setPaint(starBG); //like setting the paint, but is setting the tile to paint repeatedly instead of a single color
 		g2.fillRect(0, 0, getWidth(), getHeight()); //fill whole window with stars
+		for(Entity e:entities) { //repaint all entities!
+			e.paint(g);
+		}
 	}
 	
 	

@@ -6,10 +6,6 @@ import javax.imageio.ImageIO;
 
 public class ImageHandler {
 
-	public ImageHandler() {
-		
-	}
-	
 	static {
 		File imgDir = new File("res" + File.separator + "images");
 		if(!imgDir.exists()) {
