@@ -14,22 +14,17 @@ public class AsteroidPanel extends JPanel {
 	private static final long serialVersionUID = 1L; //be rid of stupid warning
 	
 	private static BufferedImage stars = ImageHandler.getImage("stars.png");
-	
+	private AsteroidWorld world;
 	private ArrayList<Entity> entities = new ArrayList<Entity>();
 	
-	public AsteroidPanel() {
+	public AsteroidPanel(AsteroidWorld world) {
 		this.setPreferredSize(new Dimension(640,480)); //set preferred size of the game panel used with pack()
 		this.setBackground(Color.BLACK); //set default  background as something that will fit in with the game
 		Player p = new Player();
 		entities.add(p);
 		this.addKeyListener(p);
 		this.setFocusable(true);
-	}
-	
-	public void tick() {
-		for(Entity e:entities) {
-			e.tick();
-		}
+		this.world = world;
 	}
 	
 	@Override
@@ -41,9 +36,7 @@ public class AsteroidPanel extends JPanel {
 		
 		g2.setPaint(starBG); //like setting the paint, but is setting the tile to paint repeatedly instead of a single color
 		g2.fillRect(0, 0, getWidth(), getHeight()); //fill whole window with stars
-		for(Entity e:entities) { //repaint all entities!
-			e.paint(g);
-		}
+		world.paint(g);
 	}
 	
 	
