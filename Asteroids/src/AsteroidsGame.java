@@ -1,22 +1,22 @@
-import javax.swing.JFrame;
+import javax.swing.Timer;
 
 public class AsteroidsGame {
 
+	
 	public static void main(String[] args) {
-		JFrame frame = new JFrame();//Making a frame for display
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //close when hit close
+		AsteroidWorld world = new AsteroidWorld(640, 480);
 		
-		AsteroidPanel content = new AsteroidPanel(); //makes a panel for the background
-		frame.add(content); //adds it to the panel
+		Timer t = new Timer(1000/60, e->world.tick());
 		
+//		Timer t = new Timer(1000/60, new ActionListener() {
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				world.tick();
+//			}
+//		});
+		world.show();
+		t.start();
 		
-		
-		
-		
-		
-		frame.pack(); //size to fit contents
-		frame.setLocationRelativeTo(null); //center on screen
-		frame.setVisible(true); //show panel after fixes
 		
 	}
 
