@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Polygon;
 import java.awt.Shape;
 
@@ -13,14 +14,14 @@ public class Asteroid extends AsteroidWorld.Entity {
 		this.edgeLoop = true;
 		this.radius = radius;
 		this.rotSpeed = Math.random()/5-0.1;
-		
+		this.color = Color.WHITE;
 		this.shape = genShape();
 		
 		
 	}
 	
 	public Asteroid(Asteroid parent, boolean up) {
-		this(parent.radius/2, parent.travelDir+(up?0.1:-0.1));
+		this(parent.radius*0.7, parent.travelDir+(up?0.1:-0.1));
 		this.x = parent.x;
 		this.y = parent.y;
 	}
