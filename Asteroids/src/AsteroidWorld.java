@@ -7,9 +7,9 @@ import java.awt.Rectangle;
 import java.awt.Shape;
 import java.awt.TexturePaint;
 import java.awt.geom.AffineTransform;
-import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -60,6 +60,17 @@ public class AsteroidWorld {
 		
 	}
 	
+	@SuppressWarnings("unchecked")
+	public <T extends Entity> ArrayList<T> getEntitiesOfType(Class<T> type){
+		ArrayList<T> out = new ArrayList<T>();
+		for(Entity e: entities) {
+			 if(type.isAssignableFrom(e.getClass())){
+				out.add((T)e);
+			}
+		}
+		return out;
+	}
+	
 	public int getWidth() {
 		return this.width;
 	}
@@ -76,6 +87,7 @@ public class AsteroidWorld {
 		toRemove.add(e);    
 	}
 	public void tick() {
+		
 		this.entities.addAll(this.toAdd);
 		toAdd.clear();
 		for(Entity e:entities) {
@@ -94,37 +106,26 @@ public class AsteroidWorld {
 	
 	public abstract static class Entity {
 		AsteroidWorld world;
-		double x,y, rotation, xSpeed, ySpeed, maxDist; 
+		double x,y, rotation, xSpeed, ySpeed; 
 		
 		boolean edgeLoop, fill;
 		Color color;
-		Shape shape; //object has shape
+		protected Shape shape; //object has shape
 		
 		public void tick() {//has ability to update
 			this.x+=this.xSpeed;
 			this.y+=this.ySpeed;
-			if(edgeLoop) {
-				if (this.x < 0) {
-					this.x = this.world.getWidth() ;
-				}
-				if (this.x > this.world.getWidth()) {
-					this.x = 0;
-				}
 
-				if (this.y < 0) {
-					this.y = this.world.getHeight();
-				}
-				if (this.y > this.world.getHeight() ) {
-					this.y = 0;
-				}
-			}
-			else {
-				if(this.x < -this.maxDist || this.y < this.maxDist || this.x > this.world.getWidth()+this.maxDist || this.y > this.world.getHeight()+ this.maxDist) {
-					this.world.remove(this);
-				}
-			}
-		}
-		
+			if(this.x < 0)
+				this.x += world.width;
+			if(this.x > world.width)
+				this.x-= world.width;
+			if(this.y > world.height)
+				this.y-=world.height;
+			if(this.y < 0)
+				this.y+=world.height;
+	
+		}		
 		public void paint(Graphics g) {
 			
 			Graphics2D g2 = (Graphics2D) g; //convert thing to paint to be 2D
@@ -133,6 +134,8 @@ public class AsteroidWorld {
 			
 			at.translate(x, y); //transformations apply in reverse order. translates last
 			at.rotate(rotation); //rotate lol
+		
+			
 			
 			AffineTransform backup = g2.getTransform(); //backup transformations before application
 			g2.transform(at); //perform the transformation
@@ -146,16 +149,6 @@ public class AsteroidWorld {
 		
 		public void setParentWorld(AsteroidWorld world) {
 			this.world = world;
-		}
-		
-		protected void setShape(Shape shape) {
-			this.shape = shape;
-			Rectangle2D bounds = shape.getBounds2D();
-			this.maxDist = Math.sqrt(Math.pow(bounds.getWidth(), 2) + Math.pow(bounds.getHeight(), 2));
-		}
-		
-		protected Shape getShape() {
-			return this.shape;
 		}
 		
 
@@ -186,6 +179,18 @@ public class AsteroidWorld {
 			
 			g2.setPaint(starBG); //like setting the paint, but is setting the tile to paint repeatedly instead of a single color
 			g2.fillRect(0, 0, getWidth(), getHeight()); //fill whole window with stars
+			
+			
+			for(int x = -1; x <= 1; x++) {
+				for(int y = -1; y <= 1; y++) {
+					Graphics2D g3 = (Graphics2D)g2.create();
+					g3.translate(x*width, y*height);
+					for(Entity e:entities) {
+						e.paint(g3);
+					}
+				}
+			}
+			
 			for(Entity e: AsteroidWorld.this.entities) {
 				e.paint(g);
 			}

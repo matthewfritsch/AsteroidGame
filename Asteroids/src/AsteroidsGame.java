@@ -17,6 +17,7 @@ public class AsteroidsGame {
 		world.show();
 		t.start();
 		
+		
 	}
 
 }

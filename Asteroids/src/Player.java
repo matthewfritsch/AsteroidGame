@@ -49,16 +49,13 @@ public class Player extends AsteroidWorld.Entity implements KeyListener {
 		ySpeed *= 0.96;
 		
 		if (fire && System.currentTimeMillis() - lastFire > fireDelay) {
-			this.world.add(new Projectile(this, 10, 1));
+			this.world.add(new Projectile(this, 10, 1, 750));
 			this.lastFire = Math.max(System.currentTimeMillis(), lastFire+fireDelay);
 		}
 	}
 
 	@Override
-	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-
-	}
+	public void keyTyped(KeyEvent e) {}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
@@ -78,19 +75,14 @@ public class Player extends AsteroidWorld.Entity implements KeyListener {
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-		if (e.getKeyCode() == KeyEvent.VK_A) {
+		if (e.getKeyCode() == KeyEvent.VK_A) 
 			left = false;
-		}
-		if (e.getKeyCode() == KeyEvent.VK_D) {
+		if (e.getKeyCode() == KeyEvent.VK_D) 
 			right = false;
-		}
-		if (e.getKeyCode() == KeyEvent.VK_W) {
+		if (e.getKeyCode() == KeyEvent.VK_W) 
 			up = false;
-		}
-		if(e.getKeyCode() == KeyEvent.VK_SPACE) {
+		if(e.getKeyCode() == KeyEvent.VK_SPACE) 
 			fire = false;
-		}
 	}
 
 }
