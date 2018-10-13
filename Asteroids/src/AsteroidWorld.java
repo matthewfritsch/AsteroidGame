@@ -85,7 +85,7 @@ public class AsteroidWorld {
 	public void remove(Entity e) {
 		e.setParentWorld(null);
 		toRemove.add(e);    
-	}
+	} 
 	public void tick() {
 		
 		this.entities.addAll(this.toAdd);
