@@ -1,6 +1,6 @@
 # AsteroidGame
 
-![Image of Asteroids Game](https://imgur.com/a/z9Tzyas)
+![Image of Asteroids Game](https://i.imgur.com/FEewqhX.png)
 
 #### This is a basic Asteroids clone. It was made with some of my 8th, 9th, and 10th grade students. 
 
