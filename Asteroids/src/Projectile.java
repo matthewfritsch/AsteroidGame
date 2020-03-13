@@ -21,9 +21,9 @@ public class Projectile extends AsteroidWorld.Entity {
 		if(System.currentTimeMillis() > deathTime) {
 			world.remove(this);
 		}
-		Asteroid ass = this.collidesWithType(Asteroid.class);
-		if(ass != null) {
-			ass.split();
+		Asteroid a = this.collidesWithType(Asteroid.class);
+		if(a != null) {
+			a.split();
 			world.remove(this);
 		}
 	}

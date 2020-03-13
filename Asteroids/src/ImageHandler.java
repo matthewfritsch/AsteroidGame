@@ -5,14 +5,12 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class ImageHandler {
-
 	static {
 		File imgDir = new File("res" + File.separator + "images");
 		if(!imgDir.exists()) {
 			imgDir.mkdirs();
 		}
 	}
-	
 	public static BufferedImage getImage(String name) {
 		File f = new File("res" + File.separator + "images" + File.separator + name);
 		try {
@@ -24,5 +22,4 @@ public class ImageHandler {
 			return null;
 		}
 	}
-
 }

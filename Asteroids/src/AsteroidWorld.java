@@ -35,23 +35,8 @@ public class AsteroidWorld {
 	public void show() {
 		JFrame frame = new JFrame();// Making a frame for display
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // close when hit close
-
-//		ComponentListener maintainAspectRatio = new ComponentListener() {
-//			public void componentShown(ComponentEvent e){}
-//			@Override
-//			public void componentResized(ComponentEvent e) {
-//				
-//				
-//				
-//			}
-//			public void componentMoved(ComponentEvent e){}
-//			public void componentHidden(ComponentEvent e){}
-//		};
-//		
-
 		this.panel = new AsteroidPanel();
 		this.panel.addKeyListener(player);
-//		frame.addComponentListener(maintainAspectRatio);
 		frame.add(panel); // adds it to the panel
 
 		frame.setResizable(false);
@@ -175,7 +160,6 @@ public class AsteroidWorld {
 		public void setParentWorld(AsteroidWorld world) {
 			this.world = world;
 		}
-
 	}
 
 	@SuppressWarnings("serial")
@@ -198,23 +182,12 @@ public class AsteroidWorld {
 		public void paintComponent(Graphics g) { // Final step of drawing chain by repaint
 			super.paintComponent(g); // default draw, just fills background
 
-			TexturePaint starBG = new TexturePaint(stars, new Rectangle(0, 0, stars.getWidth(), stars.getHeight()));// lets
-																													// you
-																													// paint
-																													// an
-																													// image
-																													// and
-																													// tile
-																													// it
-																													// from
-																													// an
-																													// origin
+			TexturePaint starBG = new TexturePaint(stars, new Rectangle(0, 0, stars.getWidth(), stars.getHeight()));
+			//line above lets you paint an image and tile it from an origin
 			Graphics2D g2 = (Graphics2D) g;
-
 			g2.setPaint(starBG); // like setting the paint, but is setting the tile to paint repeatedly instead
 									// of a single color
 			g2.fillRect(0, 0, getWidth(), getHeight()); // fill whole window with stars
-
 			for (int x = -1; x <= 1; x++) {
 				for (int y = -1; y <= 1; y++) {
 					Graphics2D g3 = (Graphics2D) g2.create();
@@ -224,7 +197,6 @@ public class AsteroidWorld {
 					}
 				}
 			}
-
 			for (Entity e : AsteroidWorld.this.entities) {
 				e.paint(g);
 			}
